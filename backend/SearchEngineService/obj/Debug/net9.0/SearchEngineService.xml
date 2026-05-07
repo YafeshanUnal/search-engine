@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SearchEngineService</name>
+    </assembly>
+    <members>
+        <member name="T:SearchEngineService.Controllers.CacheController">
+            <summary>
+            Cache management and debugging endpoints
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Controllers.CacheController.#ctor(Microsoft.Extensions.Caching.Memory.IMemoryCache)">
+            <summary>
+            Cache management and debugging endpoints
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Controllers.CacheController.GetCacheInfo">
+            <summary>
+            Get all cache keys and values for debugging
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Controllers.CacheController.ClearCache">
+            <summary>
+            Clear all cache
+            </summary>
+        </member>
+        <member name="T:SearchEngineService.Controllers.ContentsController">
+            <summary>
+            Content management and search API endpoints
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Controllers.ContentsController.#ctor(SearchEngineService.Services.ContentSearchService,SearchEngineService.Services.ContentIngestionService)">
+            <summary>
+            Content management and search API endpoints
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Controllers.ContentsController.Search(System.String,System.Nullable{SearchEngineService.Models.ContentType},System.String,System.Int32,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            Search contents with filters and pagination
+            </summary>
+            <param name="keyword">Search keyword in title</param>
+            <param name="type">Content type filter (Video or Text)</param>
+            <param name="sortBy">Sort by field (final, popularity, relevance)</param>
+            <param name="page">Page number (default: 1)</param>
+            <param name="pageSize">Page size (default: 10, max: 100)</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Paginated search results</returns>
+        </member>
+        <member name="M:SearchEngineService.Controllers.ContentsController.Sync(System.Threading.CancellationToken)">
+            <summary>
+            Sync data from all configured providers
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>Sync result with imported count</returns>
+        </member>
+        <member name="T:SearchEngineService.Models.ContentItem">
+            <summary>
+            Content item entity with scoring and metadata
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Id">
+            <summary>
+            Unique identifier for the content item
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.ExternalId">
+            <summary>
+            External identifier from the provider
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Provider">
+            <summary>
+            Provider name (e.g., "provider-json", "provider-xml")
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Title">
+            <summary>
+            Content title
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Type">
+            <summary>
+            Content type (Video or Text)
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Views">
+            <summary>
+            Number of views
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Likes">
+            <summary>
+            Number of likes
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.Reactions">
+            <summary>
+            Number of reactions
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.ReadingTime">
+            <summary>
+            Reading time in minutes
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.PopularityScore">
+            <summary>
+            Popularity score calculated from views and likes
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.RelevanceScore">
+            <summary>
+            Relevance score based on content matching
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.FinalScore">
+            <summary>
+            Final calculated score for ranking
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.PublishedAtUtc">
+            <summary>
+            Publication date in UTC
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.CreatedAtUtc">
+            <summary>
+            Creation date in UTC
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.LastSyncedAtUtc">
+            <summary>
+            Last synchronization date in UTC
+            </summary>
+        </member>
+        <member name="P:SearchEngineService.Models.ContentItem.RowVersion">
+            <summary>
+            Row version for concurrency control
+            </summary>
+        </member>
+        <member name="T:SearchEngineService.Services.StartupService">
+            <summary>
+            Service to handle startup tasks like auto-sync
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Services.StartupService.#ctor(SearchEngineService.Repositories.IContentRepository,SearchEngineService.Services.ContentIngestionService,Microsoft.Extensions.Caching.Memory.IMemoryCache,Microsoft.Extensions.Logging.ILogger{SearchEngineService.Services.StartupService})">
+            <summary>
+            Service to handle startup tasks like auto-sync
+            </summary>
+        </member>
+        <member name="M:SearchEngineService.Services.StartupService.PerformStartupTasksAsync(System.Threading.CancellationToken)">
+            <summary>
+            Perform startup tasks including auto-sync
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+    </members>
+</doc>
